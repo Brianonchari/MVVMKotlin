@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="myviewmodel"
+            name="viewmodel"
             type="com.studycode.mvvmkotlin.ui.auth.AuthViewModel" />
 
     </data>
@@ -78,7 +78,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/email_or_username"
-                            android:text="@={myviewmodel.email}"
+                            android:text="@={viewmodel.email}"
                             android:inputType="textEmailAddress|text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +88,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/password_et"
-                            android:text="@={myviewmodel.password}"
+                            android:text="@={viewmodel.password}"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/password"
@@ -118,7 +118,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:onClick="@{myviewmodel::onLoginButtonClicked}"
+                    android:onClick="@{viewmodel::onLoginButtonClick}"
                     android:text="@string/signin"
                     android:textColor="@color/White" />
 

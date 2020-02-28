@@ -18,6 +18,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+
     }
     buildTypes {
         release {
@@ -29,9 +35,16 @@ android {
     dataBinding {
         enabled = true
     }
+
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
+
+    def room_version = "2.2.4"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -65,13 +78,19 @@ dependencies {
     implementation 'org.kodein.di:kodein-di-framework-android-x:6.5.0'
 
     //Android Room
-    implementation "androidx.room:room-runtime:2.2.4"
-    implementation "androidx.room:room-ktx:2.2.4"
-    kapt 'androidx.room:room-compiler:2.2.4'
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
 
     //Android Navigation Architecture
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0-alpha02"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.0-alpha02"
 
+
+    implementation 'com.xwray:groupie:2.3.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
+    implementation 'com.xwray:groupie-databinding:2.3.0'
 
 }

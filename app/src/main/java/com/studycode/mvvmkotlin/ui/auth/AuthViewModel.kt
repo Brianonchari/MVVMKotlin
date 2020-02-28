@@ -18,7 +18,7 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun getLoggedinUser() = repository.getUser()
 
-    suspend fun onLoginButtonClicked(v: View) {
+     fun onLoginButtonClick(v: View) {
         authListener?.onStareted()
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
             authListener?.onFailure("Invalid email or password")
@@ -72,12 +72,12 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
             return
         }
 
-        Coroutines.main {
-            val response = repository.userSignUp(email!!, name!!, password!!)
-            if (response.isSuccessful) {
-                authListener?.onSuccess(response.body()?.user!!)
-            }
-        }
+//        Coroutines.main {
+//            val response = repository.userSignUp(email!!, name!!, password!!)
+//            if (response.isSuccessful) {
+//                authListener?.onSuccess(response.body()?.user!!)
+//            }
+//        }
 
     }
 
