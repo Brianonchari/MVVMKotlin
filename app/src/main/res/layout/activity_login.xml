@@ -5,12 +5,13 @@
     <data>
 
         <variable
-            name="viewmodel"
+            name="myviewmodel"
             type="com.studycode.mvvmkotlin.ui.auth.AuthViewModel" />
 
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -77,7 +78,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/email_or_username"
-                            android:text="@={viewmodel.email}"
+                            android:text="@={myviewmodel.email}"
                             android:inputType="textEmailAddress|text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,7 +88,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/password_et"
-                            android:text="@={viewmodel.password}"
+                            android:text="@={myviewmodel.password}"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/password"
@@ -117,7 +118,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:onClick="@{viewmodel::onLoginButtonClicked}"
+                    android:onClick="@{myviewmodel::onLoginButtonClicked}"
                     android:text="@string/signin"
                     android:textColor="@color/White" />
 
@@ -153,5 +154,5 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

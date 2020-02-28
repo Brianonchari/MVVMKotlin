@@ -36,9 +36,13 @@ interface MyApi {
 
     companion object {
 
-        operator fun invoke(): MyApi {
+        operator fun invoke(networkConnectionInterceptor: NetworkConnectionInterceptor): MyApi {
 
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(networkConnectionInterceptor)
+                .build()
             return Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl("https://api.simplifiedcoding.in/course-apis/mvvm/")
 //                .baseUrl("https://xyz-chama-api.herokuapp.com/")
                 .addConverterFactory(ApiWorker.gsonConverter)
