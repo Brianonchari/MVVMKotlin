@@ -20,7 +20,10 @@ class UserRepository(private val api: MyApi,
     fun getUser() = db.getUserDao().getuser()
 
 
-//    fun userSignUp(email: String,name:String,password: String):Response<AuthResponse>{
-//        return MyApi().userSignup(name, email, password)
-//    }
+    suspend fun userSignUp(email: String,name:String,password: String):AuthResponse{
+        return apiRequest{
+            api.userSignup(name, email, password)
+        }
+
+    }
 }

@@ -29,7 +29,7 @@ interface MyApi {
 
     @FormUrlEncoded
     @POST("signup")
-    fun userSignup(@Field("name") name:String,
+    suspend fun userSignup(@Field("name") name:String,
                    @Field("email") email: String,
                    @Field("password") password: String):retrofit2.Response<AuthResponse>
 

@@ -1,5 +1,6 @@
 package com.studycode.mvvmkotlin.ui.auth
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
@@ -44,14 +45,26 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
         }
     }
 
-    fun onSignupButtonClicked(v: View) {
-
-        if (name.isNullOrEmpty() || email.isNullOrEmpty() || password.isNullOrEmpty() || passwordconfirm.isNullOrEmpty()) {
-            authListener?.onFailure("All Fields are required")
-            if (password != passwordconfirm) {
-                authListener?.onFailure("Passwords do not match")
-            }
+    fun onSignup(v:View){
+        Intent(v.context,SignUpActivity::class.java).also {
+            v.context.startActivity(it)
         }
+    }
+
+    fun onLogin(v:View){
+        Intent(v.context,LoginActivity::class.java).also {
+            v.context.startActivity(it)
+        }
+    }
+
+    fun onSignupButtonClick(v: View) {
+
+//        if (name.isNullOrEmpty() || email.isNullOrEmpty() || password.isNullOrEmpty() || passwordconfirm.isNullOrEmpty()) {
+//            authListener?.onFailure("All Fields are required")
+//            if (password != passwordconfirm) {
+//                authListener?.onFailure("Passwords do not match")
+//            }
+//        }
         if (name.isNullOrEmpty()) {
             authListener?.onFailure("Name is required")
             return
@@ -72,12 +85,23 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
             return
         }
 
-//        Coroutines.main {
-//            val response = repository.userSignUp(email!!, name!!, password!!)
-//            if (response.isSuccessful) {
-//                authListener?.onSuccess(response.body()?.user!!)
-//            }
-//        }
+        Coroutines.main {
+            try {
+                val authResponse = repository.userSignUp(name!!,email!!, password!!)
+                authResponse.user?.let {
+                    authListener?.onSuccess(it)
+                    repository.saveUser(it)
+                    return@main
+                }
+                authListener?.onFailure(authResponse.message!!)
+
+            } catch (e: ApiException) {
+                Log.e("Exception", e.message)
+                authListener?.onFailure(e.message!!)
+            }catch (e:NoInternetException){
+                authListener?.onFailure(e.message!!)
+            }
+        }
 
     }
 

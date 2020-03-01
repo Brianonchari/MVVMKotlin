@@ -139,16 +139,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{viewmodel::onSignup}"
                     android:text="@string/Dont_have_an_account"
                     android:textColor="@color/Black"
                     android:textStyle="normal" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/signup"
-                    android:textColor="#F0878D"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/signup"-->
+<!--                    android:textColor="#F0878D"-->
+<!--                    android:textStyle="bold" />-->
 
             </LinearLayout>
 

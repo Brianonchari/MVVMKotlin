@@ -4,7 +4,7 @@
     <string name="signin">Login</string>
     <string name="password">Password</string>
     <string name="forgot_pin">Forgot Password</string>
-    <string name="Dont_have_an_account">Don\'t have an accout? SignUp</string>
+    <string name="Dont_have_an_account">Don\'t have an accout? \n SignUp</string>
     <string name="signup">SignUp</string>
     <string name="already_have_an_account">Already have an account? SignIn</string>
     <string name="email">Email</string>

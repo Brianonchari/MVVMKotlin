@@ -5,41 +5,39 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.studycode.mvvmkotlin.R
-import com.studycode.mvvmkotlin.data.db.AppDatabase
 import com.studycode.mvvmkotlin.data.db.entities.User
-import com.studycode.mvvmkotlin.data.network.MyApi
-import com.studycode.mvvmkotlin.data.network.NetworkConnectionInterceptor
-import com.studycode.mvvmkotlin.data.repositories.UserRepository
 import com.studycode.mvvmkotlin.databinding.ActivityLoginBinding
 import com.studycode.mvvmkotlin.ui.home.HomeActivity
 import com.studycode.mvvmkotlin.utils.hide
 import com.studycode.mvvmkotlin.utils.show
 import com.studycode.mvvmkotlin.utils.snackBar
 import kotlinx.android.synthetic.main.activity_login.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class LoginActivity : AppCompatActivity(), AuthListener {
-
-
+class LoginActivity : AppCompatActivity(), AuthListener,KodeinAware {
     private val TAG = "LoginActivity"
+
+    override val kodein by kodein()
+    private val factory :AuthViewModelFactory by instance()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
-        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
-        val api = MyApi(networkConnectionInterceptor)
-        val db = AppDatabase(this)
-        val repository = UserRepository(api, db)
-        val factory = AuthViewModelFactory(repository)
+//        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+//        val api = MyApi(networkConnectionInterceptor)
+//        val db = AppDatabase(this)
+//        val repository = UserRepository(api, db)
+//        val factory = AuthViewModelFactory(repository)
 
-//        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         val viewModel = ViewModelProviders.of(this,factory).get(AuthViewModel::class.java)
-//        val viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
 
 
         binding.viewmodel = viewModel
