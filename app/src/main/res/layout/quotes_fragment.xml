@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.quotes.QuotesFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/quote_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:listitem="@layout/item_quote"
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
